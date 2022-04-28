@@ -1,0 +1,68 @@
+.ipet {
+  text-align: center;
+  background-color: #234567;
+}
+
+.ipet-logo {
+  height: 20vmin;
+  pointer-events: none;
+  padding-top: 20px;
+}
+
+.ipet-header {
+  background-color: #234567;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+input[type="text"],
+input[type="password"] {
+  height: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+input::placeholder {
+  color: #234567;
+  text-align: center;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px;
+}
+.App-link {
+  color: #61dafb;
+}
+
+button:hover {
+  color:#234567;
+  background-color: #3c97f3;
+}
+.left-button {
+  margin-right: 50px;
+  border-radius: 15px;
+}
+.right-button {
+  margin-left: 50px;
+  border-radius: 15px;
+}
+
+.new-account {
+  font-size: 15px;
+}
+
+.new-account:hover {
+  color: #3c97f3;
+  cursor: pointer;
+}
