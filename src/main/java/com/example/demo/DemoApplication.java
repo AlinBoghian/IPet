@@ -27,27 +27,27 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
-	ResponseEntity<User> runner(@RequestBody MyRepository repo, MongoTemplate template) {
-//		ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:admin@ipetcluster.kngmx.mongodb.net/test?retryWrites=true&w=majority");
-//		MongoClientSettings settings = MongoClientSettings.builder()
-//				.applyConnectionString(connectionString)
-//				.serverApi(ServerApi.builder()
-//						.version(ServerApiVersion.V1)
-//						.build())
-//				.build();
-//		MongoClient mongoClient = MongoClients.create(settings);
-//		MongoDatabase database = mongoClient.getDatabase("test");
-			User user = new User(
-					"Cristina@gmail.com",
-					"Cristina",
-					"1234",
-					true
-			);
-
-		System.out.println("POST");
-		repo.insert(user);
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
-	}
+//	@Bean
+//	ResponseEntity<User> runner(@RequestBody MyRepository repo, MongoTemplate template) {
+////		ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:admin@ipetcluster.kngmx.mongodb.net/test?retryWrites=true&w=majority");
+////		MongoClientSettings settings = MongoClientSettings.builder()
+////				.applyConnectionString(connectionString)
+////				.serverApi(ServerApi.builder()
+////						.version(ServerApiVersion.V1)
+////						.build())
+////				.build();
+////		MongoClient mongoClient = MongoClients.create(settings);
+////		MongoDatabase database = mongoClient.getDatabase("test");
+//			User user = new User(
+//					"Cristina@gmail.com",
+//					"Cristina",
+//					"1234",
+//					true
+//			);
+//
+//		System.out.println("POST");
+//		repo.insert(user);
+//		return new ResponseEntity<>(user, HttpStatus.CREATED);
+//	}
 
 }

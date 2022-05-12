@@ -1,8 +1,7 @@
 package com.example.demo;
 
-import com.example.demo.User;
+import com.example.demo.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
