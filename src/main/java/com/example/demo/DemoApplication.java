@@ -16,6 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.Arrays;
+import java.util.List;
+
 @SpringBootApplication
 @EnableMongoRepositories
 
@@ -25,29 +32,27 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
+//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test1");
+//		try {
+//			EntityManager em = emf.createEntityManager();
+//			nativeQuery(em, "SHOW TABLES");
+//			nativeQuery(em, "SHOW COLUMNS from EntityA");
+//			nativeQuery(em, "SHOW COLUMNS from EntityB");
+//			emf.close();
+//		} finally {
+//			emf.close();
+//		}
 	}
 
-//	@Bean
-//	ResponseEntity<User> runner(@RequestBody MyRepository repo, MongoTemplate template) {
-////		ConnectionString connectionString = new ConnectionString("mongodb+srv://admin:admin@ipetcluster.kngmx.mongodb.net/test?retryWrites=true&w=majority");
-////		MongoClientSettings settings = MongoClientSettings.builder()
-////				.applyConnectionString(connectionString)
-////				.serverApi(ServerApi.builder()
-////						.version(ServerApiVersion.V1)
-////						.build())
-////				.build();
-////		MongoClient mongoClient = MongoClients.create(settings);
-////		MongoDatabase database = mongoClient.getDatabase("test");
-//			User user = new User(
-//					"Cristina@gmail.com",
-//					"Cristina",
-//					"1234",
-//					true
-//			);
-//
-//		System.out.println("POST");
-//		repo.insert(user);
-//		return new ResponseEntity<>(user, HttpStatus.CREATED);
+//	private static void nativeQuery(EntityManager em, String s) {
+//		System.out.println("--------\n" + s);
+//		Query query = em.createNativeQuery(s);
+//		List list = query.getResultList();
+//		for (Object o : list) {
+//			System.out.println(Arrays.toString((Object[]) o));
+//		}
 //	}
+
+
 
 }

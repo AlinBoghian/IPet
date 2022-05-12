@@ -23,19 +23,14 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
+@Document(collection = "users")
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
         @UniqueConstraint(columnNames = { "email" }) })
 public class User {
     @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private String id;
-    @NotBlank
-    @Size(max = 40)
-    @Column(name = "email")
-    @Email
-    @Indexed(unique = true) //ensures uniqueness
-     private String email;
     @NotBlank
     @Column(name = "username")
     private String username;
@@ -43,8 +38,18 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(max = 100)
     @Column(name = "password")
-    private String passwd;
-    private boolean state;
+    private String password;
+
+    @NotBlank
+    @Column(name = "type")
+    private String type;
+    @NotBlank
+    @Size(max = 40)
+    @Column(name = "email")
+    @Email
+    @Indexed(unique = true) //ensures uniqueness
+     private String email;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
@@ -80,15 +85,14 @@ public class User {
         this.id = id;
         this.email = email;
         this.username = username;
-        this.passwd = passwd;
-        this.state = state;
+        this.password = passwd;
+
     }
 
     public User(String email, String username, String passwd, boolean state) {
         this.email = email;
         this.username = username;
-        this.passwd = passwd;
-        this.state = state;
+        this.password = passwd;
     }
 
     public String getId() {
@@ -104,12 +108,9 @@ public class User {
     }
 
     public String getPasswd() {
-        return passwd;
+        return password;
     }
 
-    public boolean isState() {
-        return state;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -124,14 +125,14 @@ public class User {
     }
 
     public void setPasswd(String passwd) {
-        this.passwd = passwd;
+        this.password = passwd;
     }
 
-    public void setState(boolean state) {
-        this.state = state;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public boolean getState() {
-        return state;
+    public String getType() {
+        return type;
     }
 }

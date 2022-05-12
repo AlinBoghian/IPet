@@ -4,7 +4,7 @@ import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +38,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/users")//handles PUT HTTP Requests
     public ResponseEntity<User> addUser(@RequestBody User u) {
         String email = u.getEmail();
@@ -48,6 +48,7 @@ public class UserController {
             user = repo.findUserByUsername(u.getUsername());
             if(user.isEmpty()) {
                 repo.insert(u);
+
                 System.out.println("All good");
                 return new ResponseEntity<>(u, HttpStatus.CREATED);
             } else {
@@ -67,7 +68,7 @@ public class UserController {
            _user.setEmail(u.getEmail());
            _user.setUsername(u.getUsername());
            _user.setPasswd(u.getPasswd());
-           _user.setState(u.getState());
+           _user.setType(u.getType());
            return new ResponseEntity<>(repo.insert(_user), HttpStatus.OK);
        } else {
            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
