@@ -18,7 +18,7 @@ public class Sighting {
     @Column(name = "id")
     private String id;
     @NotBlank
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="lost_id") //create foreign key linking Sighting to Lost
     //one Lost animal has multiple sightings
     private Lost lost;

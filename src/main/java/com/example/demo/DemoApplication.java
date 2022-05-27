@@ -30,29 +30,7 @@ public class DemoApplication {
 //	@Autowired
 //	MyRepository repo;
 	public static void main(String[] args) {
-
 		SpringApplication.run(DemoApplication.class, args);
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("test1");
-//		try {
-//			EntityManager em = emf.createEntityManager();
-//			nativeQuery(em, "SHOW TABLES");
-//			nativeQuery(em, "SHOW COLUMNS from EntityA");
-//			nativeQuery(em, "SHOW COLUMNS from EntityB");
-//			emf.close();
-//		} finally {
-//			emf.close();
-//		}
 	}
-
-//	private static void nativeQuery(EntityManager em, String s) {
-//		System.out.println("--------\n" + s);
-//		Query query = em.createNativeQuery(s);
-//		List list = query.getResultList();
-//		for (Object o : list) {
-//			System.out.println(Arrays.toString((Object[]) o));
-//		}
-//	}
-
-
 
 }

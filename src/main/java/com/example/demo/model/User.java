@@ -6,8 +6,12 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,10 +27,13 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Data
+@EqualsAndHashCode
 @Document(collection = "users")
-@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
-        @UniqueConstraint(columnNames = { "email" }) })
-public class User {
+public class User implements UserDetails {
+    @javax.persistence.Id
+    @Column(name = "id_2", nullable = false)
+    private Long id2;
+
     @Id //primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -41,22 +48,71 @@ public class User {
     private String password;
 
     @NotBlank
-    @Column(name = "type")
-    private String type;
-    @NotBlank
     @Size(max = 40)
     @Column(name = "email")
     @Email
+
+
     @Indexed(unique = true) //ensures uniqueness
      private String email;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+   // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+    private Boolean locked = false;
+    private Boolean enabled = false;
+
+    public Long getId2() {
+        return id2;
+    }
+
+    public void setId2(Long id2) {
+        this.id2 = id2;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public User(String username, String password, String email, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
     public List<Post> getPosts() {
         return posts;
@@ -89,12 +145,6 @@ public class User {
 
     }
 
-    public User(String email, String username, String passwd, boolean state) {
-        this.email = email;
-        this.username = username;
-        this.password = passwd;
-    }
-
     public String getId() {
         return id;
     }
@@ -103,8 +153,34 @@ public class User {
         return email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority auth = new SimpleGrantedAuthority(role.name());
+        return Collections.singleton(auth);
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public String getPasswd() {
@@ -128,11 +204,4 @@ public class User {
         this.password = passwd;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 /*GridFS is an API used to store data > 16MB (max size for BSON doc)
  */
-@Document(collection = "posts")
+@Document(collection = "postsss")
 public class Post {
         @Id
         private String id;

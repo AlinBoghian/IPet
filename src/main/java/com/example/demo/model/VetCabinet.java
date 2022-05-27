@@ -33,6 +33,7 @@ public class VetCabinet {
     private Location location;
 
     @NotBlank
+    @JsonIgnore
     @Column(name = "reviews")
     private List<Review> reviews;
     public VetCabinet() {
